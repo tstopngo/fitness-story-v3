@@ -1,2 +1,3 @@
 class LogWorkoutsController < ApplicationController
+  
 end
