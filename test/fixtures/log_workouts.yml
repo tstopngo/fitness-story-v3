@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reps: 1
+  workout_id: one
+  log_id: one
+
+two:
+  reps: 1
+  workout_id: two
+  log_id: two
