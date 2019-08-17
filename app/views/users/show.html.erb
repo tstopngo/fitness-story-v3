@@ -1,2 +1,10 @@
-<h1>Hi, <%= current_user.email %> </h1>
+<h1>Hi, <%= @user.email %> </h1>
+
+
+<% if @user == current_user%>
+<%=link_to "New Log", new_log_path %>
+<%=link_to "Edit Profile", edit_user_path %>
 <%= link_to 'Log Out', logout_path, method: :destroy %>
+<%end%>
+
+<p><%= session[:user_id]%></p>

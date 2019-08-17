@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :require_login
+  skip_before_action :require_login, only: [:create, :new]
+
   def new
     @user = User.new
   end
@@ -15,11 +18,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    if logged_in?
-      current_user
-    else
-      redirect_to '/login'
-    end
+    @user = User.find_by(id: params[:id])
+  end
+
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    @user.update(user_params)
   end
 
   private
