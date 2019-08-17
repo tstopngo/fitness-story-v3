@@ -8,7 +8,16 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(username: params[:username])
+    user = User.find_by(:email => params[:email])
+    user = user.try(:authenticate, params[:password])
+    return redirect_to '/signup' unless user
+    session[:user_id] = user.id
+    @user = user
+  end
+
+  def destroy
+    session.delete :user_id
+    redirect_to '/'
   end
 
 

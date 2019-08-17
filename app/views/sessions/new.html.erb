@@ -1,7 +1,2 @@
 <h1>Login</h1>
-<% form_for @user, url: login_path, method: :post do |f| %>
-<%= f.label :username %>
-<%= f.text_field :username %>
-<%= f.label :password %>
-<%= f.text_field :password %>
-<%end%>
+<%= render 'login'%>

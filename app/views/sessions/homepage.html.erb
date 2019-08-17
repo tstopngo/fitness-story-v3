@@ -1,10 +1,6 @@
 <h1>Welcome to Fitness Story</h1>
-<% form_for @user, url: root_path, method: :post do |f| %>
-<%= f.label :username %>
-<%= f.text_field :username %>
-<%= f.label :password %>
-<%= f.text_field :password %>
-<%end%>
+<%= render 'login' %>
+<br>
 
-<%= link_to "Sign Up", signup_path %></br>
-<%= link_to "Log In", login_path %>
+<p><%= link_to "Sign Up", signup_path %>
+<br><%= link_to "Log In", login_path %></p>
