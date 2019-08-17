@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :logs
   resources :users
 
-  get  '/signup' => 'user#new'
+  get  '/signup' => 'users#new'
   post '/signup' => 'users#create'
 
   get  '/login' => 'sessions#new'
