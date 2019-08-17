@@ -9,18 +9,29 @@ class WorkoutsController < ApplicationController
     @workout = Workout.create(workout_params)
   end
 
+  def show
+    @workout = Workout.find_by(params[:id])
+  end
+
   def edit
-    
+    @workout = Workout.find_by(params[:id])
   end
 
   def update
-
+    @workout = Workout.find_by(params[:id])
+    @workout.update(workout_params)
+    redirect_to workout_path(@workout)
   end
 
   def destroy
-
+    @workout = Workout.find_by(params[:id])
+    @workout.destroy
+    redirect_to workouts_path
   end
 
   private
+    def workout_params
+      params.require(:workout).permit(:name, :type)
+    end
 
 end
