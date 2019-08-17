@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
+    #Use this instead of current_user to allow view other profiles
   end
 
   def edit
@@ -28,6 +29,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     @user.update(user_params)
+    redirect_to user_path(@user)
   end
 
   private
