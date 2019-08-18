@@ -6,7 +6,6 @@ class LogsController < ApplicationController
   end
 
   def create
-    @user = current_user
     @log = Log.create(log_params)
     if @log.valid?
       @log.save

@@ -1,5 +1,5 @@
-<p>@<%=@log.created_at%></p>
-<p><%=@log.updated_at%></p>
+<p>@<%=time_convert @log.created_at%></p>
+<p><%=@log.updated_at.time_convert%></p>
 <p><%=@log.calories%></p>
 <p><%=@log.workout_time%></p>
 

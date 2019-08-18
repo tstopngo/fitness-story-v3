@@ -7,6 +7,12 @@ class WorkoutsController < ApplicationController
 
   def create
     @workout = Workout.create(workout_params)
+    if @workout.valid?
+      @workout.save
+      redirect_to log_path (@workout)
+    else
+      render :new
+    end
   end
 
   def show
