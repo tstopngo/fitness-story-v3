@@ -14,7 +14,8 @@
     Calories: <%= log.calories%><br>
     Workout Time: <%=log.workout_time%><br>
     <h3>Workouts:</h3>
-      <%=@user.workouts.each do |workout| %>
+
+      <%log.workouts.each do |workout| %>
           <%=workout.name%>
           <%=workout.type%>
           <%=workout.log_workouts.amount%>
