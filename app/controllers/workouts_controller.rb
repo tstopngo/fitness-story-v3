@@ -9,7 +9,7 @@ class WorkoutsController < ApplicationController
     @workout = Workout.create(workout_params)
     if @workout.valid?
       @workout.save
-      redirect_to log_path (@workout)
+      redirect_to workout_path(@workout)
     else
       render :new
     end
@@ -37,7 +37,7 @@ class WorkoutsController < ApplicationController
 
   private
     def workout_params
-      params.require(:workout).permit(:name, :type)
+      params.require(:workout).permit(:name, :workout_type)
     end
 
 end

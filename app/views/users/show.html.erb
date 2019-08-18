@@ -9,9 +9,10 @@
 
 <% @user.logs.each do |log| %>
   <div class="logs">
+    <br>
     Posted at: <%=time_convert log.created_at%><br>
     Calories: <%= log.calories%><br>
     Workout Time: <%=log.workout_time%><br>
-    <%link_to "Edit Log", edit_log_path(log)%>
+    <%=link_to "Edit Log", edit_log_path(log)%>
   </div>
 <%end%>
