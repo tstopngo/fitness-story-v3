@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_201539) do
   create_table "logs", force: :cascade do |t|
     t.integer "calories"
     t.integer "workout_time"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
