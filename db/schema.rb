@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2019_08_16_201539) do
 
   create_table "log_workouts", force: :cascade do |t|
-    t.integer "reps"
+    t.integer "amount"
     t.integer "workout_id"
     t.integer "log_id"
     t.datetime "created_at", null: false

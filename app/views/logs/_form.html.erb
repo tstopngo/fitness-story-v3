@@ -1,25 +1,46 @@
-<% if @log.errors.any? %>
-  <div id="error_explanation">
-    <h2>
-      <%= pluralize(@log.errors.count, "error") %>
-      occured while creating the log:
-    </h2>
-
-    <ul>
-    <% @log.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<%end%>
-
 <%=form_for @log do |f| %>
+
+  <% if @log.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@log.errors.count, "error") %>
+        occured while creating the log:
+      </h2>
+
+      <ul>
+      <% @log.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <%end%>
+
   <%=f.hidden_field :user_id, value: current_user.id %>
+
   <%=f.label :calories %><br>
   <%=f.text_field :calories %><br>
 
-  <p><%=f.label :workout_time %><br>(mins)</p>
+  <br>
+  <%=f.label :workout_time %>(mins)<br>
   <%=f.text_field :workout_time %><br>
+
+  <br>
+  <%=f.label "Choose Workout" %><br>
+  <%=f.collection_select :workout_ids, Workout.all, :id, :name %>
+
+  <br>
+  <%=f.label "OR Add New Workout" %><br>
+  <%=f.fields_for :workouts, @log.workouts.build do |workout_fields| %>
+    Name:<%=workout_fields.text_field :name%><br>
+    Workout Type: <%=workout_fields.select :workout_type, ['Aerobic', 'Strength', 'Flexibility', 'Balance']%><br>
+    <br>
+  <%end%>
+
+  <%=f.label "Amount"%> Reps or Time(mins) <br>
+  <%= f.fields_for :log_workouts, @log.log_workouts.build do |lwf| %>
+    <%lwf.text_field :amount%>
+  <%end%>
+  <br>
 
   <%=f.submit %>
 <%end%>

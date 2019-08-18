@@ -13,6 +13,12 @@
     Posted at: <%=time_convert log.created_at%><br>
     Calories: <%= log.calories%><br>
     Workout Time: <%=log.workout_time%><br>
+    <h3>Workouts:</h3>
+      <%=@user.workouts.each do |workout| %>
+          <%=workout.name%>
+          <%=workout.type%>
+          <%=workout.log_workouts.amount%>
+      <%end%>
     <%=link_to "Edit Log", edit_log_path(log)%>
   </div>
 <%end%>
