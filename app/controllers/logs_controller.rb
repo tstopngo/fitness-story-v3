@@ -6,9 +6,11 @@ class LogsController < ApplicationController
   end
 
   def create
+    @user = current_user
     @log = Log.create(log_params)
-    if @log.save
-      redirect_to @log
+    if @log.valid?
+      @log.save
+      redirect_to log_path (@log)
     else
       render :new
     end
@@ -36,6 +38,6 @@ class LogsController < ApplicationController
 
   private
     def log_params
-      params.require(:log).permit(:workout_time, :calories)
+      params.require(:log).permit(:workout_time, :calories, :user_id)
     end
 end

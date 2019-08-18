@@ -1,12 +1,27 @@
+<% if @log.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@log.errors.count, "error") %>
+      occured while creating the log:
+    </h2>
+
+    <ul>
+    <% @log.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<%end%>
+
 <%=form_for @log do |f| %>
+  <%=f.hidden_field :user_id, value: current_user.id %>
   <%=f.label :calories %><br>
-  <%=f.number_field :calories %><br>
+  <%=f.text_field :calories %><br>
 
   <p><%=f.label :workout_time %><br>(mins)</p>
-  <%=f.number_field :workout_time %><br>
+  <%=f.text_field :workout_time %><br>
 
   <%=f.submit %>
-
-<% end %>
+<%end%>
 
 <%= current_user.id%>

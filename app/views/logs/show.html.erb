@@ -1,4 +1,6 @@
-<p>@log.created_at</p>
-<p>@log.updated_at</p>
-<p>@log.calories</p>
-<p>@log.time</p>
+<p>@<%=@log.created_at%></p>
+<p><%=@log.updated_at%></p>
+<p><%=@log.calories%></p>
+<p><%=@log.workout_time%></p>
+
+<%=link_to "Profile", user_path(current_user) %>

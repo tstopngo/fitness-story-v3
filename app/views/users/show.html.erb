@@ -1,19 +1,14 @@
-<h1>Hi, <%= @user.email %> </h1>
-
-
-<%= @user.logs.each do |log| %>
-  <div class="log">
-    <%=log.calories%>
-    <%=log.workout_time%>
-    <%log.created_at%>
-  </div>
-<%end%>
-
+<h1>Hi, <%= @user.email %></h1>
 
 <% if @user == current_user%>
 <%=link_to "New Log", new_log_path %>
 <%=link_to "Edit Profile", edit_user_path %>
-<%= link_to 'Log Out', logout_path, method: :destroy %>
+<%=link_to 'Log Out', logout_path, method: :destroy %>
 <%end%>
 
-<p><%= session[:user_id]%></p>
+
+<%= @user.logs.each do |log| %>
+    Calories: <%= log.calories%><br>
+    Workout Time: <%=log.workout_time%><br>
+    Posted at: <%=log.created_at%><br>
+<%end%>
