@@ -25,21 +25,8 @@
   <%=f.text_field :workout_time %><br>
 
   <br>
-  <%=f.label "Choose Workout" %><br>
-  <%=f.collection_select :workout_ids, Workout.all, :id, :name %>
 
-  <br>
-  <%=f.label "OR Add New Workout" %><br>
-  <%=f.fields_for :workouts, @log.workouts.build do |workout_fields| %>
-    Name:<%=workout_fields.text_field :name%><br>
-    Workout Type: <%=workout_fields.select :workout_type, ['Aerobic', 'Strength', 'Flexibility', 'Balance']%><br>
-    <br>
-  <%end%>
 
-  <%=f.label "Amount"%> Reps or Time(mins) <br>
-  <%= f.fields_for :log_workouts, @log.log_workouts.build do |lwf| %>
-    <%lwf.text_field :amount%>
-  <%end%>
   <br>
 
   <%=f.submit %>

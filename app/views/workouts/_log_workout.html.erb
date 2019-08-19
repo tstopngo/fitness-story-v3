@@ -1,0 +1,20 @@
+<%= form_for @workout do |f| %>
+	<%= f.hidden_field :log_id, :value => @log.id %>
+
+	<%= f.fields_for :log_workout do |w| %>
+		<%= w.label :amount %>
+		<%= w.text_field :amount %>
+	<% end %>
+
+	<%= f.label :name %>
+	<%= f.text_field :name %><br>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :workout_type %>
+  <%= f.select :workout_type, ['Aerobic', 'Strength', 'Flexibility', 'Balance'] %><br>
+
+    <%= f.submit %>
+
+<% end %>

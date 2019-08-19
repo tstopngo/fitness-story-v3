@@ -18,8 +18,10 @@
       <%log.workouts.each do |workout| %>
           <%=workout.name%>
           <%=workout.type%>
-          <%=workout.log_workouts.amount%>
       <%end%>
+    <% if @user == current_user%>
     <%=link_to "Edit Log", edit_log_path(log)%>
+    <%=link_to "Delete Log", log, method: :delete%>
+    <%end%>
   </div>
 <%end%>

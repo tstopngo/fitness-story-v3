@@ -32,11 +32,11 @@ class LogsController < ApplicationController
   def destroy
     @log = Log.find_by(params[:id])
     @log.destroy
-    redirect_to logs_path
+    redirect_to user_path(current_user)
   end
 
   private
     def log_params
-      params.require(:log).permit(:workout_time, :calories, :user_id, workout_ids:[], workout_attributes: [:name, :workout_type], log_workout_attributes: [:amount])
+      params.require(:log).permit(:workout_time, :calories, :user_id, workout_attributes: [:name, :workout_type], log_workout_attributes: [:amount])
     end
 end
