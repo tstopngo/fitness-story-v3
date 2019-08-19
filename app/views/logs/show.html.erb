@@ -10,4 +10,5 @@
 </p>
 
 <%=link_to "Profile", user_path(current_user) %>
+<%=link_to "Edit Log", edit_log_path(@log)%>
 <%=link_to "Delete Log",@log, method: :delete %>

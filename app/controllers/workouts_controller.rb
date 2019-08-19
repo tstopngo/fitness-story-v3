@@ -1,6 +1,10 @@
 class WorkoutsController < ApplicationController
   before_action :require_login
 
+  def index
+    @workouts = Workout.all
+  end
+
   def new
     @workout = Workout.new
   end
@@ -16,21 +20,21 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    @workout = Workout.find_by(params[:id])
+    @workout = Workout.find(params[:id])
   end
 
   def edit
-    @workout = Workout.find_by(params[:id])
+    @workout = Workout.find(params[:id])
   end
 
   def update
-    @workout = Workout.find_by(params[:id])
+    @workout = Workout.find(params[:id])
     @workout.update(workout_params)
     redirect_to workout_path(@workout)
   end
 
   def destroy
-    @workout = Workout.find_by(params[:id])
+    @workout = Workout.find(params[:id])
     @workout.destroy
     redirect_to workouts_path
   end

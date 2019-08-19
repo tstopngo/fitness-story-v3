@@ -1,0 +1,8 @@
+<h1>Workouts</h1>
+
+<%@workouts.each do |workout| %>
+  <div class="workout">
+  <%=link_to workout.name, workout_path(workout) %>
+  <%=workout.workout_type %>
+  </div>
+<%end%>

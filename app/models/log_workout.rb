@@ -1,4 +1,4 @@
 class LogWorkout < ApplicationRecord
-  belongs_to :workout
   belongs_to :log
+  belongs_to :workout
 end
