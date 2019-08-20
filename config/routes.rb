@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :users, only: [:show] do
-    resources :logs, only: [:show, :index]
+    resources :logs, only: [:show, :index, :new]
   end
 
   get  '/signup' => 'users#new'

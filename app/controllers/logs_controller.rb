@@ -19,7 +19,7 @@ class LogsController < ApplicationController
   end
 
   def new
-    @log = Log.new
+    @log = Log.new(user_id: params[:user_id])
     @workout = @log.workouts.build
     @log_workout = @workout.log_workouts.build
   end
