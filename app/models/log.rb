@@ -7,7 +7,7 @@ class Log < ApplicationRecord
   validates :calories, presence: true
   validates :workout_time, presence: true
 
-  scope :user -> (user) {where user: user}
+  
 
   accepts_nested_attributes_for :workouts
 

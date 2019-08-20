@@ -39,7 +39,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bcrypt'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
 gem 'dotenv-rails'
 
 gem 'cocoon'
