@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     if logged_in?
       redirect_to user_path(current_user)
     else
-    @user = User.new
+      @user = User.new
     end
   end
 
@@ -26,6 +26,11 @@ class SessionsController < ApplicationController
   def destroy
     session.delete :user_id
     redirect_to '/'
+  end
+
+  private
+  def auth
+    request.env['omniauth.auth']
   end
 
 end
