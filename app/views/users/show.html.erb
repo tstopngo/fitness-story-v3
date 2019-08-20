@@ -3,22 +3,30 @@
 <% if @user == current_user%>
 <%=link_to "New Log", new_log_path %>
 <%=link_to "Edit Profile", edit_user_path %>
+<%=link_to "User's Log List", user_logs_path(@user) %>
 <%=link_to 'Log Out', logout_path, method: :destroy %>
+
 <%end%>
+
+<div>
+
+
 
 
 <% @user.logs.each do |log| %>
   <div class="logs">
     <br>
-    Posted at: <%=time_convert log.created_at%><br>
+    <h2>Posted at: <%=time_convert log.created_at%></h2>
     Calories: <%= log.calories%><br>
     Workout Time: <%=log.workout_time%><br>
     <h3>Workouts:</h3>
 
       <%log.workouts.each do |workout| %>
           <%=workout.name%>
-          <%=workout.type%>
+          <%=workout.workout_type%>
       <%end%>
+    <br>
+    <br>
     <% if @user == current_user%>
     <%=link_to "Edit Log", edit_log_path(log)%>
     <%=link_to "Delete Log", log, method: :delete%>

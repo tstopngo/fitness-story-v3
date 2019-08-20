@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   resources :logs
   resources :users
 
+  resources :users, only: [:show] do
+    resources :logs, only: [:show, :index]
+  end
+
   get  '/signup' => 'users#new'
   post '/signup' => 'users#create'
 

@@ -3,7 +3,7 @@
   <% if @log.errors.any? %>
     <div id="error_explanation">
       <h2>
-        <%= pluralize(log.errors.count, "error") %>
+        <%= pluralize(@log.errors.count, "error") %>
         occured while creating the log:
       </h2>
 
@@ -32,6 +32,10 @@
     <%-workout_fields.label :workout_type%><br>
     <%=workout_fields.select :workout_type, ['Aerobic', 'Strength', 'Flexibility', 'Balance']%><br>
     <br>
+      <%=workout_fields.fields_for :log_workouts do |lwf| %>
+        <%=lwf.label :amount %>
+        <%=lwf.number_field :amount%>
+      <%end%>
   <%end%>
 
   <br>

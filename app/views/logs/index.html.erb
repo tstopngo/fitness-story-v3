@@ -1,0 +1,19 @@
+<h1>Logs</h1>
+
+<%if !params[:user_id]%>
+<h3>Filter Logs:</h3>
+<%= form_tag("/logs", method: "get") do %>
+  <%= select_tag "user", options_from_collection_for_select(User.all, 'id', 'email'), include_blank: true %>
+  <%= select_tag "date", options_for_select(["Newest", "Oldest"]), include_blank: true %>
+  <%= submit_tag "Filter" %>
+  <%end%>
+<% end %>
+</div>
+<br>
+
+<%@logs.each do |log| %>
+  <div class="log">
+  <%=link_to log.user.email, log_path(log) %>
+  Posted at: <%=time_convert log.created_at %>
+  </div>
+<%end%>

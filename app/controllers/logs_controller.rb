@@ -1,15 +1,32 @@
 class LogsController < ApplicationController
   #before_action :current_user, :require_login
 
+  def index
+    @users = User.all
+    if params[:user_id]
+      @logs = User.find(params[:user_id]).logs
+    elsif !params[:user].blank?
+      @logs = Log.by_user(params[:user])
+    elsif !params[:date].blank?
+        if params[:date] == 'Newest'
+          @logs = Log.newest
+        else
+          @logs = Log.oldest
+        end
+    else
+      @logs= Log.all
+    end
+  end
+
   def new
     @log = Log.new
     @workout = @log.workouts.build
+    @log_workout = @workout.log_workouts.build
   end
 
   def create
-    @log = Log.create(log_params)
-    if @log.valid?
-      @log.save
+    @log = Log.new(log_params)
+    if @log.save
       redirect_to log_path(@log)
     else
       render :new
@@ -38,6 +55,6 @@ class LogsController < ApplicationController
 
   private
     def log_params
-      params.require(:log).permit(:workout_time, :calories, :user_id, workout_ids: [], workouts_attributes: [:name, :workout_type])
+      params.require(:log).permit(:workout_time, :calories, :user_id, workouts_attributes: [:id, :name, :workout_type, log_workouts_attributes: [:id, :amount]])
     end
 end
