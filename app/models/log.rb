@@ -7,8 +7,6 @@ class Log < ApplicationRecord
   validates :calories, presence: true
   validates :workout_time, presence: true
 
-  
-
   accepts_nested_attributes_for :workouts
 
     def self.by_user(user_id)
@@ -25,14 +23,19 @@ class Log < ApplicationRecord
 
 
   #when creating a new workout from form check to see if it is db first
+  #def workouts_attributes=(workouts_attributes)
+  #  workouts_attributes.values.each do |workout_attribute|
+  #    workout = Workout.find_or_create_by(wpr)
+  #    self.workouts << workout unless self.workouts.include?(workout)
+  #    end
+  #  end
+
   def workouts_attributes=(workouts_attributes)
+    binding.pry
     workouts_attributes.values.each do |workout_attribute|
-      workout = Workout.find_or_create_by(name: workout_attribute['name'], workout_type: workout_attribute['workout_type'])
-      self.workouts << workout unless self.workouts.include?(workout)
-        workout_attribute[:log_workouts_attributes].values do |log_workout_attribute|
-          log_workout = LogWorkout.find_or_create_by(amount: log_workout_attribute['amount'])
-          self.log_workouts << log_workout
-        end
+      workout = Workout.find_or_create_by(name: workout_attribute[:name])
+      self.log_workouts.build(workout: workout)
+
     end
   end
-end
+  end

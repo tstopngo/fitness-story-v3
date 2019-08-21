@@ -1,5 +1,5 @@
 class Workout < ApplicationRecord
-  has_many :log_workouts
+  has_many :log_workouts, dependent: :destroy
   has_many :logs, through: :log_workouts
 
   accepts_nested_attributes_for :log_workouts
