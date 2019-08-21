@@ -20,12 +20,11 @@ class LogsController < ApplicationController
 
   def new
     @log = Log.new(user_id: params[:user_id])
-    @workout = @log.workouts.build
+    @workout =  @log.workouts.build
     @log_workout = @workout.log_workouts.build
   end
 
   def create
-    binding.pry
     @log = Log.create(log_params)
     if @log.save
       redirect_to log_path(@log)
@@ -52,6 +51,16 @@ class LogsController < ApplicationController
   def destroy
     Log.find(params[:id]).destroy
     redirect_to user_path(current_user)
+  end
+
+  def newest
+    @logs = Log.newest
+    render 'index'
+  end
+
+  def oldest
+    @logs = Log.oldest
+    render 'index'
   end
 
 

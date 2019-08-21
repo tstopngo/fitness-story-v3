@@ -6,6 +6,7 @@
   <%@log.workouts.each do |workout| %>
     Name:<%=workout.name%>
     Type:<%=workout.workout_type%>
+    Amount: <%=workout.log_workouts.first.amount%>
   <%end%>
 </p>
 

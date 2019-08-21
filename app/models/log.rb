@@ -30,12 +30,26 @@ class Log < ApplicationRecord
   #    end
   #  end
 
-  def workouts_attributes=(workouts_attributes)
-    binding.pry
-    workouts_attributes.values.each do |workout_attribute|
-      workout = Workout.find_or_create_by(name: workout_attribute[:name])
-      self.log_workouts.build(workout: workout)
+    def workouts_attributes=(workouts_attributes)
+      workouts_attributes.values.each do |workout_attribute|
+        workout= Workout.find_or_create_by(name: workout_attribute[:name], workout_type: workout_attribute[:workout_type])
+        self.workouts << workout unless self.workouts.include?(workout)
+        workout_attribute[:log_workouts_attributes].values.each do |log_workout_attribute|
 
+        if self.log_workouts.any? do |log_workout|
+            log_workout.log_id == self.id && log_workout.workout_id == workout.id
+          end
+          log_workout = self.log_workouts.select do |i|
+            i.workout_id == workout.id && i.log_id == self.id
+          end.first
+          log_workout.amount = log_workout_attribute[:amount] unless log_workout_attribute.blank?
+          log_workout.save
+        else
+          log_workout = self.log_workouts.select {|i| i.workout_id == workout.id}.first
+          log_workout.amount = log_workout_attribute unless log_workout_attribute.blank?
+          log_workout.save
+        end
+      end
+      end
     end
-  end
   end

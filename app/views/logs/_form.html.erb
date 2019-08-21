@@ -32,11 +32,11 @@
     <%-workout_fields.label :workout_type%><br>
     <%=workout_fields.select :workout_type, ['Aerobic', 'Strength', 'Flexibility', 'Balance']%><br>
     <br>
-      <%=workout_fields.fields_for :log_workouts do |lwf| %>
-        <%=lwf.label :amount %>
-        <%=lwf.number_field :amount%>
-      <%end%>
-  <%end%>
+    <%=workout_fields.fields_for :log_workouts do |lwf| %>
+        <%=lwf.label :amount %><br>
+        <%=lwf.number_field :amount%><br>
+        <%end%>
+    <%end%>
 
   <br>
 

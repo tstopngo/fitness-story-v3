@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'omniauth#create'
   get '/auth/failure' => '/'
 
+  get '/newest' => 'logs#newest'
+  get '/oldest' => 'logs#oldest'
+
   root 'sessions#homepage'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
