@@ -13,4 +13,8 @@ class User < ApplicationRecord
     end
   end
 
+  def self.most_logs
+    joins(:logs).group("users.id").order('count(logs.id) desc').limit(1).first
+  end
+
 end

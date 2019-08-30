@@ -33,7 +33,8 @@ class UsersController < ApplicationController
   end
 
   def most_logs
-
+    @user = User.most_logs
+    render 'show'
   end
 
   private

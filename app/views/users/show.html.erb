@@ -2,7 +2,7 @@
 
 <% if @user == current_user%>
 <%=link_to "New Log", new_user_log_path(@user) %>
-<%=link_to "Edit Profile", edit_user_path %>
+<%=link_to "Edit Profile", edit_user_path(@user) %>
 <%=link_to "User's Log List", user_logs_path(@user) %>
 <%=link_to 'Log Out', logout_path, method: :destroy %>
 
@@ -34,3 +34,5 @@
     <%end%>
   </div>
 <%end%>
+
+<p>Total Posts: <%= @user.logs.count %></p>

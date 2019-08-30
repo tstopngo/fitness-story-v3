@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   get '/newest' => 'logs#newest'
   get '/oldest' => 'logs#oldest'
+  get '/most_logs' => 'users#most_logs'
 
   root 'sessions#homepage'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
