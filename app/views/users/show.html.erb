@@ -22,8 +22,9 @@
     <h3>Workouts:</h3>
 
       <%log.workouts.each do |workout| %>
-          <%=workout.name%>
-          <%=workout.workout_type%>
+          Name: <%=workout.name%>
+          Workout Type: <%=workout.workout_type%>
+          Amount: <%=workout.log_workouts.first.amount%>
       <%end%>
     <br>
     <br>

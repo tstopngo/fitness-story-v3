@@ -16,9 +16,13 @@ class SessionsController < ApplicationController
   end
 
   def create
+    if fb_auth = auth
+      @user = User.from_omniauth(fb_auth)
+    else
       @user = User.find_by(:email => params[:user][:email])
       @user = @user.try(:authenticate, params[:user][:password])
       return redirect_to '/signup' unless @user
+    end
       session[:user_id] = @user.id
       redirect_to user_path(@user)
   end

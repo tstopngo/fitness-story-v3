@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
 
-  get '/auth/facebook/callback' => 'omniauth#create'
+  get '/auth/facebook/callback' => 'sessions#create'
   get '/auth/failure' => '/'
 
   get '/newest' => 'logs#newest'

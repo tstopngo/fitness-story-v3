@@ -5,5 +5,12 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
   validates :email, presence: true
-  
+
+  def self.from_omniauth(fb_auth)
+    where(email: fb_auth['info']['email']).first_or_create do |u|
+      u.email = fb_auth['info']['email']
+      u.password = SecureRandom.hex
+    end
+  end
+
 end

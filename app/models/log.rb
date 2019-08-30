@@ -25,7 +25,7 @@ class Log < ApplicationRecord
   #when creating a new workout from form check to see if it is db first
   		def workouts_attributes=(workouts_attributes)
 
-        workouts_attributes.values.each do |workout_attribute
+        workouts_attributes.values.each do |workout_attribute|
         #workous_attributes gives you the values of the hash, which has an array of "workout objects"
 
           workout= Workout.find_or_create_by(name: workout_attribute[:name], workout_type: workout_attribute[:workout_type])
@@ -61,5 +61,6 @@ class Log < ApplicationRecord
             log_workout.save
           end
         end
-        end
+      end
+    end
   end
