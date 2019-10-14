@@ -5,34 +5,20 @@
 <%=link_to "Edit Profile", edit_user_path(@user) %>
 <%=link_to "User's Log List", user_logs_path(@user) %>
 <%=link_to 'Log Out', logout_path, method: :destroy %>
-
 <%end%>
 
-<div>
+<div id="logs" data-id="<%=current_user.id%>">
+  <h2 class="logCalories"></h2>
 
+</div>
 
-
-
-<% @user.logs.each do |log| %>
-  <div class="logs">
-    <br>
-    <h2>Posted at: <%=time_convert log.created_at%></h2>
-    Calories: <%= log.calories%><br>
-    Workout Time: <%=log.workout_time%><br>
-    <h3>Workouts:</h3>
-
-      <%log.workouts.each do |workout| %>
-          Name: <%=workout.name%>
-          Workout Type: <%=workout.workout_type%>
-          Amount: <%=workout.log_workouts.first.amount%>
-      <%end%>
-    <br>
-    <br>
-    <% if @user == current_user%>
-    <%=link_to "Edit Log", edit_log_path(log)%>
-    <%=link_to "Delete Log", log, method: :delete%>
-    <%end%>
-  </div>
-<%end%>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+  let userId = parseInt($("#logs").attr("data-id"))
+  $.get(`localhost:3000/users/${userId}/logs.json`, function(data){
+    var logs = data
+  });
+});
+</script>
 
 <p>Total Posts: <%= @user.logs.count %></p>

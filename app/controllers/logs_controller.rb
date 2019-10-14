@@ -16,6 +16,10 @@ class LogsController < ApplicationController
     else
       @logs= Log.all
     end
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @logs}
+    end
   end
 
   def new
@@ -35,6 +39,10 @@ class LogsController < ApplicationController
 
   def show
     @log = Log.find(params[:id])
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @log}
+    end
   end
 
   def edit
