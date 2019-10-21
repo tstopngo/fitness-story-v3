@@ -11,18 +11,19 @@
 <div id="logs" data-id="<%=current_user.id%>">
 </div>
 
-<p>Total Posts: <%= @user.logs.count %></p>
-
 <div id="form" >
 
 </div>
 
+<p>Total Posts: <%= @user.logs.count %></p>
+
+
+
 
 
 <script type="text/javascript" charset="utf-8">
-
-  $(function() {
     var userId = parseInt($("#logs").attr("data-id"))
+
     $.get(`/users/${userId}/logs.json`, function(data){
       var logs = data;
       var logList ="";
@@ -31,37 +32,42 @@
         '<h2>'+ log["created_at"] + "</h2>" +
         '<p>'+ 'Calories: ' + log["calories"] +'</p>' +
         '<p>'+ 'Workout Time: ' + log["workout_time"] +'</p>'
-        ;
       });
       $("#logs").html(logList);
     });
-  });
 
-  $(function(){
-    var userId = parseInt($("#logs").attr("data-id"))
+    function Log(attributes){
+      this.id = attributes.id;
+      this.created_at = attributes.created_at
+      this.workout_time = attributes.workout_time
+      this.calories = attributes.calories
+      this.user = attributes.user
+    }
+
+    Log.prototype.renderLi = function() {
+      return `<h2>New Log Added!</h2> <p> Calories: ${this.calories} </p> <p>Workout: ${this.workout_time} </p>`;
+    }
+
     $(".newLog").on("click", function(event){
       event.preventDefault();
       $('#form').append("<h2>Add New Log<h2>")
-      $('#form').append("<%= escape_javascript render(:partial => 'logs/form', :locals => { :l => @log }) %>");
+      $('#form').append("<%= escape_javascript render(:partial => 'logs/form',
+      :locals => { :l => @log }) %>");
+
+      $("#new_log").on("submit", function(e){
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          url: this.action,
+          data: $(this).serialize(),
+          success: function(response){
+            let log = new Log(response)
+            let html = log.renderLi()
+            $("#form").html(html);
+          }
+        });
+      });
     });
-  });
-
-  $(function(){
-    $("#new_log").on("submit", function(e){
-    $.ajax({
-      type: "POST",
-      url: this.action,
-      data: $(this).serialize(),
-      success: function(response){
-        //$("#comment_content").val('')
-
-        let log = new Log(response)
-        log.renderLi()
-      }
-    })
-      e.preventDefault();
-    })
-  })
 
 
 </script>

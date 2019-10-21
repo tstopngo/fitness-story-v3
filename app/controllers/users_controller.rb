@@ -20,6 +20,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     @log = Log.new
+    @workout =  @log.workouts.build
+    @log_workout = @workout.log_workouts.build
     #Use this instead of current_user to allow view other profiles
   end
 

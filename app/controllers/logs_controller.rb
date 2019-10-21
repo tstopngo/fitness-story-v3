@@ -25,16 +25,17 @@ class LogsController < ApplicationController
   def new
     @log = Log.new(user_id: params[:user_id])
     @workout =  @log.workouts.build
-    @log_workout = @workout.log_workouts.build
+    #@log_workout = @workout.log_workouts.build
   end
 
   def create
     @log = Log.create(log_params)
-    if @log.save
-      redirect_to log_path(@log)
-    else
-      render :new
-    end
+    render json: @log, status: 201
+    #if @log.save
+    #  redirect_to log_path(@log)
+    #else
+    #  render :new
+    #end
   end
 
   def show
