@@ -22,6 +22,7 @@
 
 
 <script type="text/javascript" charset="utf-8">
+
     var userId = parseInt($("#logs").attr("data-id"))
 
     $.get(`/users/${userId}/logs.json`, function(data){
@@ -68,6 +69,5 @@
         });
       });
     });
-
 
 </script>
