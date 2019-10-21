@@ -53,7 +53,6 @@
       url: this.action,
       data: $(this).serialize(),
       success: function(response){
-        //$("#comment_content").val('')
 
         let log = new Log(response)
         log.renderLi()
@@ -62,6 +61,20 @@
       e.preventDefault();
     })
   })
+    
+ //function Log(attributes){
+ // this.id = attributes.id;
+ // this.workout_time = attributes.workout_time
+ // this.calories = attributes.calories
+ // this.user = attributes.user
+//}
+
+//Log.prototype.renderLi = function(){
+
+ // let html = '<p>' + 'Calories:' this.calories + '<p>' +
+   //          '<p>' + 'Workout:' this.workout_time + '</p>';
+  //$("#logs").append(html);
+//}
 
 
 </script>
