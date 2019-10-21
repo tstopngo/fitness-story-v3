@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
+    @log = Log.new
     #Use this instead of current_user to allow view other profiles
   end
 

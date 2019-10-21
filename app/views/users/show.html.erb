@@ -1,24 +1,67 @@
 <h1><%= @user.email %></h1>
 
 <% if @user == current_user%>
-<%=link_to "New Log", new_user_log_path(@user) %>
+
+<a href="<%=new_log_path%>" class="newLog">New Log</a>
 <%=link_to "Edit Profile", edit_user_path(@user) %>
 <%=link_to "User's Log List", user_logs_path(@user) %>
 <%=link_to 'Log Out', logout_path, method: :destroy %>
 <%end%>
 
 <div id="logs" data-id="<%=current_user.id%>">
-  <h2 class="logCalories"></h2>
+</div>
+
+<p>Total Posts: <%= @user.logs.count %></p>
+
+<div id="form" >
 
 </div>
 
-<script type="text/javascript" charset="utf-8">
-$(function(){
-  let userId = parseInt($("#logs").attr("data-id"))
-  $.get(`localhost:3000/users/${userId}/logs.json`, function(data){
-    var logs = data
-  });
-});
-</script>
 
-<p>Total Posts: <%= @user.logs.count %></p>
+
+<script type="text/javascript" charset="utf-8">
+
+  $(function() {
+    var userId = parseInt($("#logs").attr("data-id"))
+    $.get(`/users/${userId}/logs.json`, function(data){
+      var logs = data;
+      var logList ="";
+      logs.forEach(function(log){
+        logList+=
+        '<h2>'+ log["created_at"] + "</h2>" +
+        '<p>'+ 'Calories: ' + log["calories"] +'</p>' +
+        '<p>'+ 'Workout Time: ' + log["workout_time"] +'</p>'
+        ;
+      });
+      $("#logs").html(logList);
+    });
+  });
+
+  $(function(){
+    var userId = parseInt($("#logs").attr("data-id"))
+    $(".newLog").on("click", function(event){
+      event.preventDefault();
+      $('#form').append("<h2>Add New Log<h2>")
+      $('#form').append("<%= escape_javascript render(:partial => 'logs/form', :locals => { :l => @log }) %>");
+    });
+  });
+
+  $(function(){
+    $("#new_log").on("submit", function(e){
+    $.ajax({
+      type: "POST",
+      url: this.action,
+      data: $(this).serialize(),
+      success: function(response){
+        //$("#comment_content").val('')
+
+        let log = new Log(response)
+        log.renderLi()
+      }
+    })
+      e.preventDefault();
+    })
+  })
+
+
+</script>

@@ -12,8 +12,34 @@
 <br>
 
 <%@logs.each do |log| %>
-  <div class="log">
-  <%=link_to log.user.email, log_path(log) %>
+  <div id="log-<%=log.id%>">
+  <a href="#" class="js-show" data-id ="<%=log.id%>"><%=log.user.email %></a>
   Posted at: <%=time_convert log.created_at %>
+    <ul id="log-<%= log.id %>-details"></ul>
+    <ul id="log-<%= log.id %>-workouts"></ul>
   </div>
 <%end%>
+
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    $(".js-show").on("click", function(event){
+      event.preventDefault();
+      var logID = $(this).data("id")
+      $.get(`/logs/${logID}.json`, function(data){
+        var log = data
+
+        var descriptionText =
+        '<p>'+ 'Calories: ' + log["calories"] +'</p>' +
+        '<p>'+ 'Workout Time: ' + log["workout_time"] +'</p>';
+        $("#log-" + logID + "-details").html(descriptionText);
+          workoutList= "";
+          var workouts = log["workouts"]
+          workouts.forEach(function(workout){
+            workoutList += '<p>'+ 'Workout: ' + workout.name +'</p>';
+          });
+          $("#log-"+logID+"-workouts").html(workoutList)
+      });
+    });
+  });
+
+</script>
