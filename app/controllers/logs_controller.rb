@@ -47,14 +47,16 @@ class LogsController < ApplicationController
   end
 
   def edit
+
     @log = Log.find(params[:id])
     @workout = @log.workouts
   end
 
   def update
-    @log = Log.find(params[:id])
-    @log.update(log_params)
-    redirect_to log_path(@log)
+      @log = Log.find(params[:id])
+      @log.update(log_params)
+      #redirect_to log_path(@log)
+      render json: @log, status: 201
   end
 
   def destroy
